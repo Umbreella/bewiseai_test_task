@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  postgres_14:
+    image: postgres:14
+    container_name: postgres_14
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  bewiseai_test_task:
+    image: umbreella/bewiseai_test_task:latest
+    container_name: bewiseai_test_task
+    ports:
+      - 8000:8000
+    environment:
+      - APP_POSTGRES_USERNAME=postgres
+      - APP_POSTGRES_PASSWORD=postgres
+      - APP_POSTGRES_DB=postgres
+      - APP_POSTGRES_HOST=postgres_14
+      - APP_POSTGRES_PORT=5432
+    depends_on:
+      - postgres_14
+
+volumes:
+  postgres:

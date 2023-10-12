@@ -5,9 +5,7 @@ from src.manager import QuestionManager
 from src.schema import QuestionSchema
 
 
-async def download_question(
-    questions_num: int,
-) -> None:
+async def download_question(questions_num: int) -> None:
     async with database.session() as session, session.begin():
         while questions_num != 0:
             url: str = f'https://jservice.io/api/random?count={questions_num}'

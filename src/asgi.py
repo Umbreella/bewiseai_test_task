@@ -8,7 +8,10 @@ from src.db import database
 
 
 def create_app(init_db: bool = True) -> FastAPI:
-    _app = FastAPI()
+    _app = FastAPI(
+        title='Bewise-ai',
+        docs_url='/api/docs'
+    )
 
     if init_db:
         database.init_db()
@@ -24,7 +27,7 @@ def create_app(init_db: bool = True) -> FastAPI:
     return _app
 
 
-app = create_app()
+application = create_app()
 
 if __name__ == '__main__':
-    uvicorn.run(app)
+    uvicorn.run(application)
